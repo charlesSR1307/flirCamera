@@ -1,11 +1,10 @@
 import os
-import sys
 import PySpin
 import numpy as np
-from guiV1 import Ui_MainWindow
-from Flirclass import flirCamera
+from .guiV1 import Ui_MainWindow
+from .Flirclass import flirCamera
 from matplotlib import pyplot as plt
-from threadReading2 import ThreadClassRead
+from .threadReading2 import ThreadClassRead
 from PyQt5 import  QtWidgets, QtGui, QtCore
 
 class mywindow(QtWidgets.QMainWindow): 
@@ -304,13 +303,6 @@ class mywindow(QtWidgets.QMainWindow):
             self.timer = QtCore.QTimer()
             self.timer.timeout.connect(self.realTimePlotData)
             self.timer.start(1)
-        '''
-        if self.camera.instanceCamera(): 
-            self.count = 0
-            self.camera.starCameraContinuousAdquisition()
-            self.processor = PySpin.ImageProcessor()
-            self.processor.SetColorProcessing(PySpin.HQ_LINEAR)
-            ''' 
 
     def saveFilePath(self):
         self.path = QtWidgets.QFileDialog.getSaveFileName(None, 'Single Image Save', os.getcwd(), 'All Files(*.*)')
@@ -367,18 +359,8 @@ class mywindow(QtWidgets.QMainWindow):
                     self.xData.pop(0)
                 self.ui.realTimegraph.setXRange(self.samples-5, self.samples-1)
                 self.ui.realTimegraph.plot(x=self.xData, y=self.yData, symbol='x')
-                #print(self.data)
             else:
                 pass
         except:
             pass 
         
-def main():
-    while True:
-        app = QtWidgets.QApplication([])
-        application = mywindow()
-        application.show()
-        sys.exit(app.exec_())
-
-if __name__ == '__main__':
-    main()
