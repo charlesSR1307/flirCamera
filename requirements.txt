@@ -1,3 +1,5 @@
+# Python versions: 2.7, 3.5. 3.6, 3.7, 3.8
+# Recomended Python 3.8
 contourpy==1.0.5
 cycler==0.11.0
 fonttools==4.37.4
